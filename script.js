@@ -12,6 +12,7 @@ const ALL_MENUS = [
 ];
 
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/1fAh1--mnsSO3mz33HovHGoXJCAyYkFofZin1ml0W82w/export?format=csv';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwLk0neHYG7gGQWX5jHCZKwHtH9BTPlS5uqYbPFWG4Q5P-LPK-IvJsMA_voklmbzYW_iQ/exec';
 
 let currentCandidates = [];
 let selectedIndex = -1;
@@ -172,7 +173,23 @@ voteBtn.addEventListener('click', async () => {
     votingSection.classList.add('hidden');
     resultsSection.classList.remove('hidden');
     
-    // 비동기 결과 처리 호출
+    const votedMenuName = currentCandidates[selectedIndex].name;
+    
+    // 백그라운드에서 구글 시트에 폼 전송 (POST 요청)
+    const formData = new URLSearchParams();
+    formData.append('menu', votedMenuName);
+    
+    // no-cors 설정으로 CORS 제약을 우회해서 백그라운드로 안전하게 값을 전송합니다.
+    fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString()
+    }).catch(console.error);
+    
+    // 비동기 시트 결과 가져오기 및 그려주기 호출
     await renderResults();
 });
 
