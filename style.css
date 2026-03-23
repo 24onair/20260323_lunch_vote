@@ -110,6 +110,53 @@ header p {
     font-weight: 400;
 }
 
+/* Voter Info Input */
+.voter-info {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.voter-info label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.required {
+    color: var(--accent-3);
+    margin-left: 4px;
+}
+
+.voter-info input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 0.8rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.2);
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.voter-info input:focus {
+    border-color: var(--accent-2);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    background: rgba(0,0,0,0.4);
+}
+
+.voter-info input::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+
 /* Glassmorphism Cards */
 .menu-grid {
     display: grid;

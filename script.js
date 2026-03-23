@@ -24,6 +24,7 @@ const resultsSection = document.getElementById('resultsSection');
 const resultsContainer = document.getElementById('resultsContainer');
 const resetBtn = document.getElementById('resetBtn');
 const shareBtn = document.getElementById('shareBtn');
+const voterNameInput = document.getElementById('voterName');
 
 // 구글 시트 투표 데이터 가져오기
 async function fetchVotes() {
@@ -169,6 +170,14 @@ async function renderResults() {
 voteBtn.addEventListener('click', async () => {
     if (selectedIndex === -1) return;
     
+    // 필수 입력 체크
+    const voterName = voterNameInput.value.trim();
+    if (!voterName) {
+        alert("투표자 이름을 입력해주세요!");
+        voterNameInput.focus();
+        return;
+    }
+    
     // 화면 전환
     votingSection.classList.add('hidden');
     resultsSection.classList.remove('hidden');
@@ -178,6 +187,7 @@ voteBtn.addEventListener('click', async () => {
     // 백그라운드에서 구글 시트에 폼 전송 (POST 요청)
     const formData = new URLSearchParams();
     formData.append('menu', votedMenuName);
+    formData.append('voter', voterName);
     
     // no-cors 설정으로 CORS 제약을 우회해서 백그라운드로 안전하게 값을 전송합니다.
     fetch(GAS_URL, {
@@ -195,6 +205,7 @@ voteBtn.addEventListener('click', async () => {
 
 resetBtn.addEventListener('click', () => {
     // 초기 뷰로 돌아가며 메뉴 재선택 적용
+    voterNameInput.value = ''; // 이름란 초기화
     selectRandomMenus();
     renderMenuCards();
     
