@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 뭐 먹지? 실시간 점심 투표</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-mesh">
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
+        <div class="blob-3"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>오늘 점심 뭐 먹지? <i class="fa-solid fa-utensils"></i></h1>
+            <p>오늘의 후보 4가지를 확인하고 투표해주세요!</p>
+        </header>
+
+        <main>
+            <section class="voting-section" id="votingSection">
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Cards injected by JS -->
+                </div>
+                <button class="btn-vote" id="voteBtn" disabled>투표하기 <i class="fa-solid fa-check-to-slot"></i></button>
+            </section>
+
+            <section class="results-section hidden" id="resultsSection">
+                <h2>실시간 투표 현황 📊</h2>
+                <div class="results-container" id="resultsContainer">
+                    <!-- Results injected by JS -->
+                </div>
+                <button class="btn-vote" id="shareBtn" style="margin-top: 1rem; background: linear-gradient(135deg, var(--accent-3), var(--accent-1));">친구들에게 공유하기 <i class="fa-solid fa-share-nodes"></i></button>
+                <button class="btn-reset" id="resetBtn">메뉴 다시 뽑기 <i class="fa-solid fa-rotate-right"></i></button>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
