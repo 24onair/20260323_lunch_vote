@@ -110,6 +110,49 @@ header p {
     font-weight: 400;
 }
 
+/* Status Box */
+.status-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.2rem 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-item {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.status-item i {
+    color: var(--accent-1);
+    margin-right: 5px;
+}
+
+.closed-msg {
+    text-align: center;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    padding: 2.5rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+}
+
+.closed-subtext {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
 /* Voter Info Input */
 .voter-info {
     margin-bottom: 1.5rem;

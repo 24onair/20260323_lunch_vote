@@ -25,6 +25,10 @@ const resultsContainer = document.getElementById('resultsContainer');
 const resetBtn = document.getElementById('resetBtn');
 const shareBtn = document.getElementById('shareBtn');
 const voterNameInput = document.getElementById('voterName');
+const currentTimeEl = document.getElementById('currentTime');
+const participantCountEl = document.getElementById('participantCount');
+const votingClosedMsg = document.getElementById('votingClosedMsg');
+const votingFormArea = document.getElementById('votingFormArea');
 
 // 구글 시트 투표 데이터 가져오기
 async function fetchVotes() {
@@ -220,6 +224,51 @@ shareBtn.addEventListener('click', () => {
     }, 2000);
 });
 
+function updateClock() {
+    const now = new Date();
+    
+    // 시간 표시 렌더링
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    currentTimeEl.textContent = `${hours}:${minutes}:${seconds}`;
+    
+    // 투표 시간 검사 (09:00 ~ 11:30)
+    // 09:00 = 540분 / 11:30 = 690분
+    const currentTotalMins = now.getHours() * 60 + now.getMinutes();
+    const isVotingTime = currentTotalMins >= 540 && currentTotalMins <= 690;
+    
+    // 시간에 따른 영역 노출 토글
+    if (isVotingTime) {
+        votingClosedMsg.classList.add('hidden');
+        votingFormArea.classList.remove('hidden');
+    } else {
+        votingClosedMsg.classList.remove('hidden');
+        votingFormArea.classList.add('hidden');
+    }
+}
+
+async function init() {
+    // 1. 시계 시작 (매 초마다 업데이트)
+    updateClock();
+    setInterval(updateClock, 1000);
+    
+    // 2. 초기 메뉴 렌더링
+    selectRandomMenus();
+    renderMenuCards();
+    
+    // 3. 누적 참여자 수 로딩
+    try {
+        const sheetData = await fetchVotes();
+        let validVotes = 0;
+        sheetData.forEach(row => {
+            if (row.menu) validVotes++;
+        });
+        participantCountEl.textContent = validVotes;
+    } catch {
+        participantCountEl.textContent = '-';
+    }
+}
+
 // 시작시 구동
-selectRandomMenus();
-renderMenuCards();
+init();

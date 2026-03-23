@@ -23,7 +23,19 @@
 
         <main>
             <section class="voting-section" id="votingSection">
-                <div class="voter-info">
+                <div class="status-box">
+                    <div class="status-item"><i class="fa-regular fa-clock"></i> <span id="currentTime">--:--:--</span></div>
+                    <div class="status-item"><i class="fa-solid fa-users"></i> 참여자: <span id="participantCount">-</span>명</div>
+                </div>
+                
+                <div id="votingClosedMsg" class="closed-msg hidden">
+                    <i class="fa-solid fa-door-closed" style="font-size: 2rem; margin-bottom: 0.5rem; display:block;"></i>
+                    현재는 투표 시간이 아닙니다.<br>
+                    <span class="closed-subtext">오늘의 식사 투표는 <b>오전 9시 ~ 오전 11시 30분</b>까지만 가능합니다.</span>
+                </div>
+
+                <div id="votingFormArea">
+                    <div class="voter-info">
                     <label for="voterName">투표자 이름 <span class="required">*</span></label>
                     <input type="text" id="voterName" placeholder="이름을 입력해주세요" autocomplete="off">
                 </div>
@@ -31,6 +43,7 @@
                     <!-- Cards injected by JS -->
                 </div>
                 <button class="btn-vote" id="voteBtn" disabled>투표하기 <i class="fa-solid fa-check-to-slot"></i></button>
+                </div>
             </section>
 
             <section class="results-section hidden" id="resultsSection">
